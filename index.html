@@ -3,129 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fluxo detalhado v2 · Aprovação de vaga e carta oferta · Plano&Plano</title>
+<title>Processo de aprovação de vaga e carta oferta · Plano&Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#073465; --navy2:#00468B; --blue:#0072BC; --blue-soft:#E6F1FB;
-    --coral:#FF5050; --coral2:#FF8E86; --coral-bg:#FFF0F0; --coral-deep:#B02A2A;
+    --navy:#001651; --navy2:#0A2A6B; --navy3:#16408F; --navy-soft:#E9EDF6;
+    --red:#ff2732; --red2:#FF6169; --red-bg:#FFECEE;
     --teal:#0F7A6B; --teal-bg:#E4F3F0;
     --amber:#B7791F; --amber-bg:#FBF2DE; --amber-line:#E7C77A;
-    --purple:#5A4AA8; --purple-bg:#EEEBF8;
-    --ink:#1B2430; --gray:#5C6672; --gray2:#8B95A3; --line:#E4E8EF;
-    --bg:#F4F6FA; --card:#FFFFFF;
-    --shadow:0 1px 3px rgba(7,52,101,.06),0 6px 20px rgba(7,52,101,.05);
+    --ink:#16202E; --gray:#525C6B; --gray2:#7E8896; --line:#E1E5EE;
+    --bg:#F5F7FB; --card:#FFFFFF;
+    --shadow:0 1px 3px rgba(0,22,81,.06),0 8px 24px rgba(0,22,81,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px 60px}
+  body{font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px 70px}
 
-  .top{background:var(--navy);color:#fff;padding:26px 0 30px;position:relative;overflow:hidden}
+  .top{background:var(--navy);color:#fff;padding:30px 0 40px;position:relative;overflow:hidden}
   .top .wrap{position:relative;z-index:2}
-  .brand{font-size:13px;letter-spacing:1.5px;font-weight:bold}
-  .brand .amp{color:var(--coral)}
-  .top h1{font-size:26px;font-weight:bold;margin:18px 0 6px;letter-spacing:-.3px}
-  .top .sub{font-size:14px;color:#AEBACD;max-width:740px}
-  .motif{position:absolute;right:-50px;top:-30px;width:240px;height:240px;z-index:1}
-  .petal{position:absolute;left:50%;top:50%;width:29px;height:64px;border-radius:50%;background:var(--coral);transform-origin:0 96px}
+  .brand{font-size:13px;letter-spacing:2px;font-weight:700}
+  .brand .amp{color:var(--red)}
+  .top h1{font-size:32px;font-weight:900;margin:20px 0 8px;letter-spacing:-.5px;line-height:1.15}
+  .top .sub{font-size:15px;color:#B7C2DA;max-width:720px;font-weight:300}
+  .top .tag{display:inline-block;margin-top:18px;background:rgba(255,39,50,.14);color:#FF9AA0;
+    border:1px solid rgba(255,97,105,.4);font-size:11.5px;font-weight:700;letter-spacing:.5px;padding:5px 12px;border-radius:20px}
+  .motif{position:absolute;right:-40px;top:-30px;width:280px;height:280px;z-index:1}
+  .petal{position:absolute;left:50%;top:50%;width:32px;height:72px;border-radius:50%;background:var(--red);transform-origin:0 110px}
 
-  .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:22px;padding:13px 18px;background:var(--card);
-    border-radius:12px;box-shadow:var(--shadow);font-size:12px;color:var(--gray)}
-  .legend .it{display:flex;align-items:center;gap:7px}
-  .legend .sw{width:13px;height:13px;border-radius:4px;flex:none}
-  .legend .diamond{width:12px;height:12px;transform:rotate(45deg);flex:none}
-  .legend .ph{font-size:9px;font-weight:bold;background:#EEF1F6;color:var(--navy2);border:1px dashed var(--navy2);padding:1px 6px;border-radius:8px}
+  .toc{background:var(--card);border-radius:14px;box-shadow:var(--shadow);margin-top:-24px;position:relative;z-index:5;
+    padding:16px 22px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+  .toc .tl{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gray2);margin-right:6px}
+  .toc a{font-size:12.5px;font-weight:500;color:var(--navy);text-decoration:none;background:var(--navy-soft);
+    padding:6px 12px;border-radius:20px;transition:all .15s}
+  .toc a:hover{background:var(--navy);color:#fff}
 
-  /* faixa de etapa (bloco por decisão) */
-  .stage{margin-top:22px;background:var(--card);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
-  .stage-head{padding:15px 22px;display:flex;align-items:center;gap:13px;border-bottom:1px solid var(--line)}
-  .stage-head .num{width:32px;height:32px;border-radius:9px;background:var(--navy);color:#fff;
-    display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:bold;flex:none}
-  .stage-head .st{font-size:16px;font-weight:bold;color:var(--navy)}
-  .stage-head .ss{font-size:12px;color:var(--gray);margin-top:1px}
-  .stage-body{padding:22px 24px;display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+  .sec{margin-top:40px}
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .sec-head .sn{width:38px;height:38px;border-radius:11px;background:var(--navy);color:#fff;flex:none;
+    display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900}
+  .sec-head h2{font-size:23px;font-weight:900;color:var(--navy);letter-spacing:-.3px}
+  .sec-intro{font-size:14.5px;color:var(--gray);max-width:820px;margin:2px 0 20px 52px}
+  .sec-intro b{color:var(--navy);font-weight:700}
 
-  /* caixas */
-  .node{border-radius:11px;padding:12px 14px;min-width:172px;max-width:220px;border:1px solid transparent}
-  .node .nt{font-size:13px;font-weight:bold;line-height:1.3;margin-bottom:4px}
-  .node .nd{font-size:11.5px;line-height:1.45}
-  .node.start{background:#EEF1F6;border-color:var(--line)}
-  .node.start .nt{color:var(--navy)} .node.start .nd{color:var(--gray)}
-  .node.proc{background:var(--blue-soft);border-color:#B5D4F4}
-  .node.proc .nt{color:var(--navy)} .node.proc .nd{color:var(--navy2)}
-  .node.exc{background:#fff;border-color:var(--coral2)}
-  .node.exc .nt{color:var(--coral)} .node.exc .nd{color:var(--gray)}
-  .node.grave{background:var(--coral-bg);border-color:var(--coral)}
-  .node.grave .nt{color:var(--coral-deep)} .node.grave .nd{color:#7A3232}
-  .node.done{background:var(--teal-bg);border-color:#A8D8CE}
-  .node.done .nt{color:var(--teal)} .node.done .nd{color:#3B6157}
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:6px}
+  .phase{background:var(--card);border-radius:13px;box-shadow:var(--shadow);padding:16px 16px 14px;
+    flex:1;min-width:150px;position:relative;border-top:4px solid var(--navy)}
+  .phase.rem{border-top-color:var(--red)}
+  .phase.talent{border-top-color:var(--navy3)}
+  .phase .pnum{font-size:11px;font-weight:700;color:var(--gray2);letter-spacing:.5px}
+  .phase .pname{font-size:15px;font-weight:900;color:var(--navy);margin:3px 0 6px;line-height:1.2}
+  .phase .pwho{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+  .phase .pdesc{font-size:12px;color:var(--gray);line-height:1.45}
+  .flow-arrow{align-self:center;color:var(--red);font-size:22px;font-weight:700;padding:0 6px;flex:none}
 
-  .fields{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:4px}
-  .field{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink);line-height:1.3}
-  .field .fdot{width:5px;height:5px;border-radius:50%;background:var(--coral);flex:none}
-  .field.new{font-weight:bold}
-  .tagnew{font-size:8.5px;background:var(--coral);color:#fff;padding:1px 5px;border-radius:8px;font-weight:bold}
-  .tagex{font-size:8.5px;background:#EEF1F6;color:var(--navy2);padding:1px 5px;border-radius:8px;font-weight:bold}
+  .fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .fcard{background:var(--card);border-radius:13px;box-shadow:var(--shadow);padding:18px 20px;border-left:4px solid var(--navy)}
+  .fcard.novo{border-left-color:var(--red)}
+  .fcard .fhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+  .fcard .fname{font-size:15.5px;font-weight:900;color:var(--navy);line-height:1.2}
+  .fcard .fbadge{font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:20px;flex:none;letter-spacing:.4px}
+  .badge-novo{background:var(--red-bg);color:var(--red)}
+  .badge-ex{background:var(--navy-soft);color:var(--navy3)}
+  .frow{display:grid;grid-template-columns:82px 1fr;gap:6px 12px;font-size:12.5px;padding:5px 0;border-bottom:1px solid #F0F2F7}
+  .frow:last-child{border-bottom:none}
+  .frow .fk{font-weight:700;color:var(--gray2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;padding-top:1px}
+  .frow .fv{color:var(--ink)}
+  .frow .fv b{color:var(--navy);font-weight:700}
 
-  /* placeholder de aprovador */
-  .ph-box{background:#F7F8FB;border:1px dashed var(--navy2);border-radius:10px;padding:11px 13px;min-width:160px;max-width:200px}
-  .ph-box .pt{font-size:12px;font-weight:bold;color:var(--navy);margin-bottom:4px}
-  .ph-box .pph{font-size:10.5px;color:var(--navy2);font-style:italic;background:#EEF1F6;border-radius:6px;padding:4px 7px;margin-top:5px;display:inline-block}
+  .decision-block{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:0;overflow:hidden;margin-top:8px}
+  .db-head{padding:16px 22px;background:var(--amber-bg);border-bottom:1px solid var(--amber-line);display:flex;align-items:center;gap:12px}
+  .db-head .di{width:30px;height:30px;background:var(--amber);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;flex:none;font-size:15px}
+  .db-head .dt{font-size:16px;font-weight:900;color:#7A5410}
+  .db-body{padding:8px 22px 18px}
+  .branch{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+  .barm{flex:1;min-width:250px;border-radius:11px;padding:15px 17px;border:1px solid var(--line)}
+  .barm.ok{background:var(--teal-bg);border-color:#A8D8CE}
+  .barm.warn{background:var(--red-bg);border-color:var(--red2)}
+  .barm .bh{font-size:14px;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .barm.ok .bh{color:var(--teal)} .barm.warn .bh{color:var(--red)}
+  .barm .bd{font-size:12.5px;color:var(--gray);line-height:1.5}
+  .barm .bd b{color:var(--ink);font-weight:700}
 
-  /* decisao losango */
-  .decision{width:132px;height:132px;flex:none;display:flex;align-items:center;justify-content:center;position:relative}
-  .decision .dbox{width:94px;height:94px;background:var(--amber-bg);border:1px solid var(--amber-line);transform:rotate(45deg);border-radius:11px}
-  .decision .dtxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px}
-  .decision .dtxt .dt{font-size:11.5px;font-weight:bold;color:var(--amber);line-height:1.2}
-  .decision .dtxt .dd{font-size:9.5px;color:#8A6516;margin-top:2px}
+  .defense{background:var(--card);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
+  .dcol{display:grid;grid-template-columns:1fr;gap:0}
+  .drow{display:grid;grid-template-columns:230px 1fr;gap:0;border-bottom:1px solid var(--line)}
+  .drow:last-child{border-bottom:none}
+  .drow.head{background:var(--navy)}
+  .drow.head .dc{color:#fff;font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;padding:13px 20px}
+  .drow .dmotivo{padding:15px 20px;background:var(--navy-soft);font-weight:700;color:var(--navy);font-size:13.5px;display:flex;align-items:center;gap:9px}
+  .drow .dmotivo .dm-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
+  .drow .devidencia{padding:15px 20px;font-size:13px;color:var(--gray);line-height:1.5}
+  .drow .devidencia b{color:var(--navy);font-weight:700}
 
-  .arr{display:flex;align-items:center;flex:none}
-  .branch{display:flex;flex-direction:column;gap:12px;flex:none}
-  .brow{display:flex;align-items:center;gap:8px}
-  .blabel{font-size:10px;font-weight:bold;padding:2px 8px;border-radius:8px;white-space:nowrap}
-  .bl-ok{background:var(--teal-bg);color:var(--teal)}
-  .bl-mid{background:var(--amber-bg);color:var(--amber)}
-  .bl-over{background:var(--coral-bg);color:var(--coral)}
+  .explain{background:linear-gradient(135deg,#001651 0%,#0A2A6B 100%);color:#fff;border-radius:16px;padding:28px 30px;margin-top:8px;position:relative;overflow:hidden}
+  .explain h3{font-size:19px;font-weight:900;margin-bottom:8px}
+  .explain p{font-size:14px;color:#C7D0E4;line-height:1.6;max-width:760px;font-weight:300}
+  .explain p b{color:#fff;font-weight:700}
+  .explain .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+  .explain .ebox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:16px 18px;position:relative;z-index:2}
+  .explain .ebox .et{font-size:14px;font-weight:900;color:#fff;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+  .explain .ebox .ed{font-size:12.5px;color:#C7D0E4;line-height:1.55;font-weight:300}
+  .explain .ebox .ed b{color:#FF9AA0;font-weight:700}
+  .explain .emotif{position:absolute;right:-30px;bottom:-40px;width:200px;height:200px;opacity:.5;z-index:1}
 
-  /* confronto 3 numeros */
-  .confront{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 13px;min-width:210px}
-  .confront .ch{font-size:10.5px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;color:var(--gray2);margin-bottom:8px}
-  .cnum{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #F0F2F6}
-  .cnum:last-child{border-bottom:none}
-  .cnum .cl{font-size:11px;color:var(--ink);display:flex;align-items:center;gap:6px}
-  .cnum .cdot{width:8px;height:8px;border-radius:2px;flex:none}
-  .cnum .cv{font-size:11px;font-weight:bold}
+  .checklist{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:22px 26px;margin-top:8px}
+  .checklist h3{font-size:16px;font-weight:900;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .checklist h3 .cd{width:8px;height:8px;border-radius:50%;background:var(--red)}
+  .checklist ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:11px 24px}
+  .checklist li{font-size:13px;color:var(--ink);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+  .checklist li .ci{width:20px;height:20px;border-radius:6px;background:var(--teal-bg);color:var(--teal);flex:none;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;margin-top:1px}
+  .checklist li b{color:var(--navy);font-weight:700}
 
-  .callout{background:var(--purple-bg);border-radius:10px;padding:10px 13px;font-size:11.5px;color:#3A2E70;
-    margin:0 24px 20px;display:flex;gap:9px;align-items:flex-start}
-  .callout b{color:var(--purple)}
-  .callout .ci{flex:none;font-weight:bold;color:var(--purple)}
+  .note{background:var(--navy-soft);border-radius:12px;padding:15px 18px;margin-top:16px;display:flex;gap:12px;align-items:flex-start}
+  .note .ni{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;flex:none;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
+  .note.red .ni{background:var(--red)}
+  .note p{font-size:13px;color:var(--ink);line-height:1.55}
+  .note p b{color:var(--navy);font-weight:700}
 
-  /* melhoria */
-  .improve{margin-top:26px;border:1px dashed var(--purple);border-radius:14px;background:#fff;padding:20px 24px}
-  .improve h3{font-size:15px;color:var(--purple);font-weight:bold;margin-bottom:4px;display:flex;align-items:center;gap:9px}
-  .improve .etag{font-size:9.5px;font-weight:bold;letter-spacing:.5px;background:var(--purple-bg);color:var(--purple);padding:3px 9px;border-radius:8px}
-  .improve .isub{font-size:12px;color:var(--gray);margin-bottom:14px}
-  .improve ul{list-style:none;display:flex;flex-direction:column;gap:11px}
-  .improve li{font-size:12.5px;color:var(--ink);display:flex;gap:11px;align-items:flex-start;line-height:1.5}
-  .improve li .lnum{width:22px;height:22px;border-radius:7px;background:var(--purple);color:#fff;font-size:12px;font-weight:bold;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
-  .improve li b{color:var(--purple)}
-
-  .rules{margin-top:20px;background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:20px 24px}
-  .rules h3{font-size:15px;color:var(--navy);font-weight:bold;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-  .rules h3 .rdot{width:8px;height:8px;border-radius:50%;background:var(--coral)}
-  .rules ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 26px}
-  .rules li{font-size:12.5px;color:var(--ink);display:flex;gap:9px;align-items:flex-start;line-height:1.45}
-  .rules li .li-ic{color:var(--coral);font-weight:bold;flex:none}
-  .rules li b{color:var(--navy)}
-
-  .foot{margin-top:22px;text-align:center;font-size:11.5px;color:var(--gray2)}
+  .foot{margin-top:44px;text-align:center;font-size:12px;color:var(--gray2);line-height:1.6}
   .foot b{color:var(--navy)}
 
   @media(max-width:820px){
-    .stage-body{flex-direction:column;align-items:stretch}
-    .rules ul{grid-template-columns:1fr}
-    .arr{transform:rotate(90deg)}
-    .branch{width:100%}
+    .fields-grid,.checklist ul,.explain .two{grid-template-columns:1fr}
+    .drow{grid-template-columns:1fr}
+    .flow-arrow{transform:rotate(90deg);width:100%;text-align:center;padding:4px 0}
+    .top h1{font-size:25px}
   }
 </style>
 </head>
@@ -135,212 +139,242 @@
   <div class="motif" id="motif"></div>
   <div class="wrap">
     <div class="brand">PLANO<span class="amp">&amp;</span>PLANO</div>
-    <h1>Fluxo de aprovação de vaga e carta oferta</h1>
-    <div class="sub">Modelo de melhoria do processo atual, com três decisões separadas: se a vaga pode existir (orçamento), quanto pagar ao candidato (salário) e se há inequidade com pares. A pretensão continua sendo questionada pela Talent.</div>
+    <h1>Processo de aprovação de vaga e carta oferta</h1>
+    <div class="sub">Material de estudo para o time entender o fluxo antes da reunião. Explica cada campo, quando é preenchido, por quem e por quê, e como tratar os casos em que o candidato vem acima do mid ou acima dos pares.</div>
+    <span class="tag">LEITURA PRÉVIA · ENTENDIMENTO DO PROCESSO</span>
   </div>
 </header>
 
 <div class="wrap">
 
-  <div class="legend">
-    <div class="it"><span class="sw" style="background:#EEF1F6;border:1px solid #E4E8EF"></span>Início / etapa</div>
-    <div class="it"><span class="sw" style="background:#E6F1FB;border:1px solid #B5D4F4"></span>Processo</div>
-    <div class="it"><span class="diamond" style="background:#FBF2DE;border:1px solid #E7C77A"></span>Decisão</div>
-    <div class="it"><span class="sw" style="background:#fff;border:1px solid #FF8E86"></span>Exceção</div>
-    <div class="it"><span class="sw" style="background:#FFF0F0;border:1px solid #FF5050"></span>Caso grave</div>
-    <div class="it"><span class="sw" style="background:#E4F3F0;border:1px solid #A8D8CE"></span>Conclusão</div>
-    <div class="it"><span class="tagnew" style="background:#FF5050;color:#fff;font-size:9px;padding:1px 5px;border-radius:8px;font-weight:bold">NOVO</span>Campo novo</div>
-    <div class="it"><span class="tagex" style="font-size:9px;padding:1px 5px;border-radius:8px">JÁ EXISTE</span>Campo atual</div>
-    <div class="it"><span class="ph">APROVADOR</span>A definir na reunião</div>
+  <div class="toc">
+    <span class="tl">Nesta página</span>
+    <a href="#fluxo">Fluxo completo</a>
+    <a href="#campos">Campos do Pipefy</a>
+    <a href="#decisao">As três decisões</a>
+    <a href="#acima">Por que pode vir acima</a>
+    <a href="#defesa">Motivos de defesa</a>
+    <a href="#evidencia">Evidências</a>
   </div>
 
-  <!-- DECISAO 1: a vaga pode existir? -->
-  <div class="stage">
-    <div class="stage-head">
-      <div class="num">1</div>
-      <div>
-        <div class="st">A vaga pode existir?</div>
-        <div class="ss">Decisão de orçamento · na abertura · Solicitante e Remuneração</div>
+  <section class="sec" id="fluxo">
+    <div class="sec-head"><div class="sn">1</div><h2>O fluxo completo, do início ao fim</h2></div>
+    <p class="sec-intro">A vaga percorre estas fases no Pipefy. A grande mudança é que a validação de orçamento, faixa e <b>equidade</b> passa a acontecer cedo, e não só quando a carta é gerada.</p>
+    <div class="flow">
+      <div class="phase">
+        <div class="pnum">FASE 1</div><div class="pname">Abertura</div><div class="pwho">Gestor</div>
+        <div class="pdesc">Solicita a vaga. Informa Nº da posição, se é orçada, e o valor orçado.</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="phase rem">
+        <div class="pnum">FASE 2</div><div class="pname">Validação Remuneração</div><div class="pwho">Remuneração</div>
+        <div class="pdesc">Confere orçado, faixa, e já sinaliza o par de menor salário na função (equidade antecipada).</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="phase talent">
+        <div class="pnum">FASE 3</div><div class="pname">Triagem</div><div class="pwho">Talent</div>
+        <div class="pdesc">Coleta e registra a pretensão do candidato assim que a conhece.</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="phase talent">
+        <div class="pnum">FASE 4</div><div class="pname">Entrevistas</div><div class="pwho">Talent + Gestor</div>
+        <div class="pdesc">Conduz o processo com o candidato. A pretensão já está registrada.</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="phase rem">
+        <div class="pnum">FASE 5</div><div class="pname">Proposta</div><div class="pwho">Remuneração</div>
+        <div class="pdesc">Confronta pretensão x orçado x par. Se estoura, abre exceção com justificativa.</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="phase">
+        <div class="pnum">FASE 6</div><div class="pname">Carta oferta</div><div class="pwho">Remuneração</div>
+        <div class="pdesc">Gerada com dados já validados. Sem retrabalho, sem surpresa de última hora.</div>
       </div>
     </div>
-    <div class="stage-body">
-      <div class="node start">
-        <div class="nt">Abertura da vaga</div>
-        <div class="nd">Gestor solicita no Pipefy</div>
-        <div class="fields">
-          <div class="field"><span class="fdot"></span>Nº posição <span class="tagex">JÁ EXISTE</span></div>
-          <div class="field"><span class="fdot"></span>Orçada/substit./extra <span class="tagex">JÁ EXISTE</span></div>
-          <div class="field new"><span class="fdot"></span>Valor orçado da vaga <span class="tagnew">NOVO</span></div>
-          <div class="field new"><span class="fdot"></span>Faixa: início/mid/fim <span class="tagnew">NOVO</span></div>
-        </div>
-      </div>
-      <div class="arr"><svg width="30" height="14"><line x1="2" y1="7" x2="22" y2="7" stroke="#FF5050" stroke-width="2"/><path d="M20 3l6 4-6 4" fill="none" stroke="#FF5050" stroke-width="2"/></svg></div>
-      <div class="decision">
-        <div class="dbox"></div>
-        <div class="dtxt"><div class="dt">Tipo de<br>vaga?</div></div>
-      </div>
-      <div class="branch">
-        <div class="brow">
-          <span class="blabel bl-ok">orçada / substituição</span>
-          <div class="arr"><svg width="26" height="12"><line x1="2" y1="6" x2="18" y2="6" stroke="#0F7A6B" stroke-width="2"/><path d="M16 2l6 4-6 4" fill="none" stroke="#0F7A6B" stroke-width="2"/></svg></div>
-          <div class="node done" style="min-width:150px"><div class="nt">Aprovação padrão</div><div class="nd">Segue direto. Orçado já contempla.</div></div>
-        </div>
-        <div class="brow">
-          <span class="blabel bl-over">não orçada / upgrade</span>
-          <div class="arr"><svg width="26" height="12"><line x1="2" y1="6" x2="18" y2="6" stroke="#FF5050" stroke-width="2"/><path d="M16 2l6 4-6 4" fill="none" stroke="#FF5050" stroke-width="2"/></svg></div>
-          <div class="ph-box">
-            <div class="pt">Aprovação orçamentária</div>
-            <div style="font-size:10.5px;color:#5C6672;line-height:1.4">Estoura o budget da diretoria</div>
-            <span class="pph">[ aprovador da área ]</span>
-          </div>
-        </div>
-      </div>
+    <div class="note">
+      <div class="ni">!</div>
+      <p><b>O que mudou de verdade.</b> Antes, a equidade e o valor do candidato só apareciam na Fase 6 (carta). Agora a equidade é sinalizada já na Fase 2 e a pretensão na Fase 3. Quando chega na carta, nada mais é surpresa.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="callout">
-    <span class="ci">!</span>
-    <span><b>Regra da vaga não orçada.</b> Ao aprovar, o mid da faixa vira o teto de referência: a Talent trabalha do início da faixa até o mid. Esse mid passa a ser o "orçado" para a Decisão 2 (senão a vaga não orçada não tem contra o que comparar a pretensão).</span>
-  </div>
+  <section class="sec" id="campos">
+    <div class="sec-head"><div class="sn">2</div><h2>Cada campo do Pipefy, explicado</h2></div>
+    <p class="sec-intro">O que criar, <b>quando</b> aparece, <b>quem</b> preenche e <b>por que</b> existe. Os campos marcados como novos são as inclusões propostas; os demais já existem hoje.</p>
+    <div class="fields-grid">
 
-  <!-- DECISAO 2: quanto pagar? -->
-  <div class="stage">
-    <div class="stage-head">
-      <div class="num">2</div>
-      <div>
-        <div class="st">Quanto pagar ao candidato?</div>
-        <div class="ss">Decisão de salário · pretensão coletada na triagem · Talent e Remuneração</div>
+      <div class="fcard novo">
+        <div class="fhead"><div class="fname">Valor orçado da vaga</div><span class="fbadge badge-novo">NOVO</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Abertura</b> (Fase 1)</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Gestor / Remuneração</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">Hoje esse valor vive numa planilha pesada à parte. Trazendo para o Pipefy, dá para comparar direto com a pretensão, sem abrir outro arquivo.</span></div>
       </div>
-    </div>
-    <div class="stage-body">
-      <div class="node proc">
-        <div class="nt">Triagem → Hiring</div>
-        <div class="nd">Talent coleta a pretensão na triagem (ritual mantido)</div>
-        <div class="fields">
-          <div class="field new"><span class="fdot"></span>Pretensão do candidato <span class="tagnew">NOVO</span></div>
-          <div class="field"><span class="fdot"></span>Registrada na triagem, obrigatória p/ carta</div>
-        </div>
-      </div>
-      <div class="arr"><svg width="30" height="14"><line x1="2" y1="7" x2="22" y2="7" stroke="#FF5050" stroke-width="2"/><path d="M20 3l6 4-6 4" fill="none" stroke="#FF5050" stroke-width="2"/></svg></div>
-      <div class="confront">
-        <div class="ch">Confronto na proposta</div>
-        <div class="cnum"><span class="cl"><span class="cdot" style="background:#0072BC"></span>Orçado (ou mid)</span><span class="cv" style="color:#0072BC">limite</span></div>
-        <div class="cnum"><span class="cl"><span class="cdot" style="background:#073465"></span>Pretensão</span><span class="cv" style="color:#073465">pedido</span></div>
-        <div class="cnum"><span class="cl"><span class="cdot" style="background:#FF5050"></span>Maior par</span><span class="cv" style="color:#FF5050">base</span></div>
-      </div>
-      <div class="arr"><svg width="30" height="14"><line x1="2" y1="7" x2="22" y2="7" stroke="#FF5050" stroke-width="2"/><path d="M20 3l6 4-6 4" fill="none" stroke="#FF5050" stroke-width="2"/></svg></div>
-      <div class="decision">
-        <div class="dbox"></div>
-        <div class="dtxt"><div class="dt">Pretensão<br>vs. orçado</div><div class="dd">dentro / acima?</div></div>
-      </div>
-      <div class="branch">
-        <div class="brow">
-          <span class="blabel bl-ok">dentro</span>
-          <div class="arr"><svg width="26" height="12"><line x1="2" y1="6" x2="18" y2="6" stroke="#0F7A6B" stroke-width="2"/><path d="M16 2l6 4-6 4" fill="none" stroke="#0F7A6B" stroke-width="2"/></svg></div>
-          <div class="node done" style="min-width:140px"><div class="nt">Carta oferta</div><div class="nd">Validado, sem retrabalho</div></div>
-        </div>
-        <div class="brow">
-          <span class="blabel bl-over">acima</span>
-          <div class="arr"><svg width="26" height="12"><line x1="2" y1="6" x2="18" y2="6" stroke="#FF5050" stroke-width="2"/><path d="M16 2l6 4-6 4" fill="none" stroke="#FF5050" stroke-width="2"/></svg></div>
-          <div class="node exc" style="min-width:140px"><div class="nt">Vai para Decisão 3</div><div class="nd">Exceção salarial + checagem de inequidade</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- DECISAO 3: gera inequidade? -->
-  <div class="stage">
-    <div class="stage-head">
-      <div class="num">3</div>
-      <div>
-        <div class="st">O estouro gera inequidade?</div>
-        <div class="ss">Decisão de equidade · Lei 14.611 / Art. 461 · Remuneração e aprovador</div>
+      <div class="fcard novo">
+        <div class="fhead"><div class="fname">Faixa da vaga (início, mid, fim)</div><span class="fbadge badge-novo">NOVO</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Validação</b> (Fase 2)</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Remuneração</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">É a régua que mede tudo. O mid é a referência: em vaga não orçada, o candidato trabalha do início da faixa <b>até o mid</b>.</span></div>
       </div>
+
+      <div class="fcard novo">
+        <div class="fhead"><div class="fname">Par de menor salário na função</div><span class="fbadge badge-novo">NOVO</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Validação</b> (Fase 2)</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Remuneração</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">Sinaliza a equidade cedo. Registrar quem já ocupa a função e ganha menos permite ver, antes da carta, se a contratação vai gerar diferença com um par.</span></div>
+      </div>
+
+      <div class="fcard novo">
+        <div class="fhead"><div class="fname">Pretensão do candidato</div><span class="fbadge badge-novo">NOVO</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Triagem</b> (Fase 3)</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Talent</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">É o dado central. Registrado na triagem, dá visão cedo dos casos que vão estourar. Obrigatório para avançar à carta, para não ser esquecido.</span></div>
+      </div>
+
+      <div class="fcard">
+        <div class="fhead"><div class="fname">Nº da posição orçamentária</div><span class="fbadge badge-ex">JÁ EXISTE</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Abertura</b> (Fase 1)</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Gestor</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">Vincula a vaga ao orçamento. Já existe, só precisa virar obrigatório para vagas novas.</span></div>
+      </div>
+
+      <div class="fcard">
+        <div class="fhead"><div class="fname">Tipo: orçada / substituição / extra</div><span class="fbadge badge-ex">JÁ EXISTE</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Abertura</b> (Fase 1)</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Gestor</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">Define se a vaga estava prevista. Não orçada e upgrade seguem para aprovação orçamentária.</span></div>
+      </div>
+
+      <div class="fcard novo">
+        <div class="fhead"><div class="fname">Motivo do estouro</div><span class="fbadge badge-novo">NOVO</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Proposta</b>, se estoura</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Remuneração</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">Lista fechada de motivos objetivos. É a justificativa que a lei exige. Se não encaixa em nenhum, é sinal de que não deveria aprovar.</span></div>
+      </div>
+
+      <div class="fcard novo">
+        <div class="fhead"><div class="fname">Evidência + aprovador</div><span class="fbadge badge-novo">NOVO</span></div>
+        <div class="frow"><span class="fk">Quando</span><span class="fv"><b>Proposta</b>, se estoura</span></div>
+        <div class="frow"><span class="fk">Quem</span><span class="fv">Remuneração + alçada</span></div>
+        <div class="frow"><span class="fk">Por quê</span><span class="fv">A prova por trás do motivo, e quem assinou a decisão. Substitui o e-mail solto por registro auditável.</span></div>
+      </div>
+
     </div>
-    <div class="stage-body">
-      <div class="node exc">
-        <div class="nt">Motivo do estouro</div>
-        <div class="nd">Lista fechada, sem campo livre</div>
-        <div class="fields">
-          <div class="field new"><span class="fdot"></span>Motivo (5 opções) <span class="tagnew">NOVO</span></div>
-          <div class="field"><span class="fdot"></span>Escassez, senioridade, requisito,</div>
-          <div class="field"><span class="fdot"></span>reposicionamento, acúmulo</div>
-        </div>
-      </div>
-      <div class="arr"><svg width="26" height="14"><line x1="2" y1="7" x2="18" y2="7" stroke="#FF5050" stroke-width="2"/><path d="M16 3l6 4-6 4" fill="none" stroke="#FF5050" stroke-width="2"/></svg></div>
-      <div class="node exc">
-        <div class="nt">Evidência + par</div>
-        <div class="nd">A prova, não só a alegação</div>
-        <div class="fields">
-          <div class="field new"><span class="fdot"></span>Evidência do motivo <span class="tagnew">NOVO</span></div>
-          <div class="field new"><span class="fdot"></span>Par e salário do par <span class="tagnew">NOVO</span></div>
-        </div>
-      </div>
-      <div class="arr"><svg width="26" height="14"><line x1="2" y1="7" x2="18" y2="7" stroke="#FF5050" stroke-width="2"/><path d="M16 3l6 4-6 4" fill="none" stroke="#FF5050" stroke-width="2"/></svg></div>
-      <div class="decision">
-        <div class="dbox"></div>
-        <div class="dtxt"><div class="dt">Par abaixo<br>sem motivo?</div></div>
-      </div>
-      <div class="branch">
-        <div class="brow">
-          <span class="blabel bl-ok">não há par</span>
-          <div class="arr"><svg width="24" height="12"><line x1="2" y1="6" x2="16" y2="6" stroke="#0F7A6B" stroke-width="2"/><path d="M14 2l6 4-6 4" fill="none" stroke="#0F7A6B" stroke-width="2"/></svg></div>
-          <div class="ph-box">
-            <div class="pt">Aprova exceção</div>
-            <div style="font-size:10.5px;color:#5C6672;line-height:1.4">Documenta e registra</div>
-            <span class="pph">[ aprovador da área ]</span>
-          </div>
-        </div>
-        <div class="brow">
-          <span class="blabel bl-over">há par defasado</span>
-          <div class="arr"><svg width="24" height="12"><line x1="2" y1="6" x2="16" y2="6" stroke="#B02A2A" stroke-width="2"/><path d="M14 2l6 4-6 4" fill="none" stroke="#B02A2A" stroke-width="2"/></svg></div>
-          <div class="node grave" style="min-width:150px">
-            <div class="nt">Nega ou corrige</div>
-            <div class="nd">Nega o estouro, ou aprova com plano de correção do par</div>
-            <div class="fields" style="border-color:#F0C0C0">
-              <div class="field new" style="color:#7A3232"><span class="fdot"></span>Plano de correção <span class="tagnew">NOVO</span></div>
-            </div>
-          </div>
+  </section>
+
+  <section class="sec" id="decisao">
+    <div class="sec-head"><div class="sn">3</div><h2>As três decisões do processo</h2></div>
+    <p class="sec-intro">Não é uma aprovação só. São três perguntas diferentes, em momentos diferentes. Entender que são separadas é o que evita confusão.</p>
+
+    <div class="decision-block">
+      <div class="db-head"><div class="di">1</div><div class="dt">A vaga pode existir?</div></div>
+      <div class="db-body">
+        <p style="font-size:13.5px;color:var(--gray);padding-top:8px">Decisão de <b style="color:var(--navy)">orçamento</b>, na abertura. Depende do tipo da vaga.</p>
+        <div class="branch">
+          <div class="barm ok"><div class="bh">✓ Orçada ou substituição</div><div class="bd">O orçamento já contempla. Aprovação padrão, segue direto.</div></div>
+          <div class="barm warn"><div class="bh">! Não orçada ou upgrade</div><div class="bd">Estoura o budget da diretoria. Sobe para aprovação orçamentária <b>[aprovador da área]</b>. Se não orçada, trabalha do início da faixa até o mid.</div></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- MELHORIA sugerida -->
-  <div class="improve">
-    <h3><span class="etag">SUGESTÃO DE MELHORIA</span> Separar quem pede de quem aprova</h3>
-    <div class="isub">Fora do processo atual. Decisão sua e do Rodrigo na reunião. Sem isso, o controle fica frágil numa auditoria.</div>
-    <ul>
-      <li><span class="lnum">1</span><span><b>Segunda assinatura independente.</b> O gerente da área quer o candidato e hoje aprova tudo. Para os casos caros (não orçada, upgrade, salário acima do mid), vale uma segunda assinatura de quem não tem interesse na contratação (você, Rodrigo ou Gisele). O gerente aprova o mérito; a segunda assinatura aprova a exceção.</span></li>
-      <li><span class="lnum">2</span><span><b>Alçada por gravidade.</b> Estouro pequeno (dentro do orçado) fica com o gerente. Médio (acima do mid, upgrade) sobe para você/Rodrigo. Grande (não orçada, muito acima do mid, ou inequidade detectada) sobe para diretor/Gisele. Distribui a decisão pelo tamanho do risco.</span></li>
-      <li><span class="lnum">3</span><span><b>Caso mais grave: não orçada + acima do mid.</b> Vaga que não era prevista cujo candidato ainda pede acima do mid definido são dois estouros empilhados. Deveria ser o mais difícil de aprovar, não o mais fácil. Marcar como aprovação de nível máximo.</span></li>
-    </ul>
-  </div>
+    <div class="decision-block" style="margin-top:16px">
+      <div class="db-head"><div class="di">2</div><div class="dt">Quanto pagar ao candidato?</div></div>
+      <div class="db-body">
+        <p style="font-size:13.5px;color:var(--gray);padding-top:8px">Decisão de <b style="color:var(--navy)">salário</b>, na proposta. Confronta a pretensão contra o orçado da vaga.</p>
+        <div class="branch">
+          <div class="barm ok"><div class="bh">✓ Dentro do orçado</div><div class="bd">Segue para a carta sem retrabalho. Registra a posição na faixa.</div></div>
+          <div class="barm warn"><div class="bh">! Acima do orçado</div><div class="bd">Abre exceção salarial. Precisa de motivo, evidência e aprovador. Vai para a Decisão 3.</div></div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Reemissao -->
-  <div class="rules">
-    <h3><span class="rdot"></span>Reemissão de carta (mudança de data e desistência)</h3>
-    <ul>
-      <li><span class="li-ic">→</span><span><b>Mudança de data:</b> reaproveita toda a validação, ajusta só a data. Meta abaixo de 24h.</span></li>
-      <li><span class="li-ic">→</span><span><b>Desistência, mesmo perfil:</b> nova pessoa na mesma vaga volta para a checagem de pares (candidato diferente exige revalidar equidade).</span></li>
-      <li><span class="li-ic">→</span><span><b>Registro versionado:</b> cada reemissão fica com o motivo da troca, sem refazer do zero.</span></li>
-      <li><span class="li-ic">→</span><span><b>Orçado preservado:</b> a referência de limite continua a mesma da vaga original.</span></li>
-    </ul>
-  </div>
+    <div class="decision-block" style="margin-top:16px">
+      <div class="db-head"><div class="di">3</div><div class="dt">O estouro gera inequidade?</div></div>
+      <div class="db-body">
+        <p style="font-size:13.5px;color:var(--gray);padding-top:8px">Decisão de <b style="color:var(--navy)">equidade</b> (Lei 14.611 / Art. 461). Compara com o par de menor salário, já sinalizado na Fase 2.</p>
+        <div class="branch">
+          <div class="barm ok"><div class="bh">✓ Não há par abaixo, ou a diferença se justifica</div><div class="bd">Documenta o motivo e a evidência. Aprova e registra.</div></div>
+          <div class="barm warn"><div class="bh">! Há par defasado sem justificativa</div><div class="bd">Nega o estouro, <b>ou</b> aprova com plano de correção do par (com prazo). Nunca aprova e ignora.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="rules" style="margin-top:20px">
-    <h3><span class="rdot"></span>Regras que valem em todo o fluxo</h3>
-    <ul>
-      <li><span class="li-ic">✓</span><span><b>Pretensão mantida.</b> Talent continua questionando o candidato. O modelo não muda isso.</span></li>
-      <li><span class="li-ic">✓</span><span><b>Não orçada trabalha até o mid.</b> Do início da faixa ao mid, e o mid vira o limite de referência.</span></li>
-      <li><span class="li-ic">✓</span><span><b>Contraproposta não é motivo.</b> Só critério objetivo: escassez, senioridade, requisito, reposicionamento, acúmulo.</span></li>
-      <li><span class="li-ic">✓</span><span><b>Fim do e-mail solto.</b> Todo estouro passa pela decisão registrada, com evidência e aprovador.</span></li>
-    </ul>
-  </div>
+  <section class="sec" id="acima">
+    <div class="sec-head"><div class="sn">4</div><h2>Por que uma pessoa pode vir acima</h2></div>
+    <p class="sec-intro">Este é o ponto que mais gera dúvida. Vir acima do mid e vir acima de um par são coisas diferentes, e a resposta para cada uma é diferente.</p>
+
+    <div class="explain">
+      <div class="emotif" id="emotif"></div>
+      <h3>A tabela defende, mas não sozinha</h3>
+      <p>A faixa salarial existe justamente para acomodar pessoas em posições diferentes dentro da mesma função. Por isso <b>vir acima do mid é normal e permitido</b>: a pessoa está na metade de cima da própria faixa, e isso a tabela sustenta. O que a tabela <b>não</b> resolve sozinha é a equidade entre pares: dois empregados podem estar ambos dentro da faixa e ainda assim existir diferença injusta entre eles. Estar na faixa dá o intervalo; a equidade olha a posição relativa de quem faz a mesma coisa.</p>
+      <div class="two">
+        <div class="ebox">
+          <div class="et">Acima do mid</div>
+          <div class="ed">É questão de <b>posição na faixa</b>. Permitido por padrão. Só vira exceção quando passa do <b>orçado</b> da vaga, não do mid em si. Em vaga não orçada, o mid é o teto.</div>
+        </div>
+        <div class="ebox">
+          <div class="et">Acima dos pares</div>
+          <div class="ed">É questão de <b>equidade</b>. É o que a lei olha. Só se sustenta se houver <b>critério objetivo</b> para a diferença. Sem critério, gera passivo e precisa de correção.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="defesa">
+    <div class="sec-head"><div class="sn">5</div><h2>Os motivos de defesa e o que provam</h2></div>
+    <p class="sec-intro">Quando o candidato vem acima, a diferença precisa de um motivo objetivo. Estes são os cinco aceitos, e a evidência que cada um exige. Contraproposta <b>não</b> entra: não é critério objetivo e não defende juridicamente.</p>
+    <div class="defense">
+      <div class="dcol">
+        <div class="drow head"><div class="dc">Motivo</div><div class="dc">O que precisa provar</div></div>
+        <div class="drow">
+          <div class="dmotivo"><span class="dm-dot"></span>Escassez de mercado</div>
+          <div class="devidencia"><b>Dificuldade real de preencher a vaga.</b> Tempo que a vaga ficou aberta, número de candidatos avaliados, quantas recusas. Mostra que o mercado não oferecia pelo valor previsto.</div>
+        </div>
+        <div class="drow">
+          <div class="dmotivo"><span class="dm-dot"></span>Senioridade acima do requisito</div>
+          <div class="devidencia"><b>Experiência maior que a exigida pelo cargo.</b> Anos de experiência acima do requisito, histórico profissional, cargos anteriores compatíveis.</div>
+        </div>
+        <div class="drow">
+          <div class="dmotivo"><span class="dm-dot"></span>Requisito diferenciado da vaga</div>
+          <div class="devidencia"><b>Competência específica que o par não tinha.</b> Certificação, idioma, especialização técnica exigida por esta vaga e comprovada pelo candidato.</div>
+        </div>
+        <div class="drow">
+          <div class="dmotivo"><span class="dm-dot"></span>Reposicionamento de mercado</div>
+          <div class="devidencia"><b>A faixa da função ficou defasada.</b> Pesquisa salarial mostrando que o mercado subiu. Aqui o entrante reflete o novo mercado, e o sinal é que o par precisa de correção.</div>
+        </div>
+        <div class="drow">
+          <div class="dmotivo"><span class="dm-dot"></span>Acúmulo de escopo</div>
+          <div class="devidencia"><b>Responsabilidades além das do par.</b> Gestão de time, projeto adicional, escopo ampliado descrito e comparável ao do par.</div>
+        </div>
+      </div>
+    </div>
+    <div class="note red">
+      <div class="ni">✕</div>
+      <p><b>Por que contraproposta ficou de fora.</b> "Tinha outra oferta" é circunstância de mercado do momento, não um critério objetivo sobre a pessoa. A lei de equidade não aceita isso como justificativa para pagar mais que um par, e registrar assim pode virar prova contra a empresa.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="evidencia">
+    <div class="sec-head"><div class="sn">6</div><h2>O que documentar em cada estouro</h2></div>
+    <p class="sec-intro">Quando há estouro com risco de inequidade, estas são as evidências a guardar. A alegação sozinha não defende; a prova, sim.</p>
+    <div class="checklist">
+      <h3><span class="cd"></span>Checklist de evidências</h3>
+      <ul>
+        <li><span class="ci">✓</span><span><b>Cargo e nível exatos</b> do entrante e do par, para provar que a comparação é entre iguais.</span></li>
+        <li><span class="ci">✓</span><span><b>Motivo objetivo</b> da diferença, escolhido da lista fechada de cinco.</span></li>
+        <li><span class="ci">✓</span><span><b>Data de abertura da vaga até o fim</b> do processo, para sustentar escassez.</span></li>
+        <li><span class="ci">✓</span><span><b>Quantidade de candidatos</b> avaliados e recusas, também para escassez.</span></li>
+        <li><span class="ci">✓</span><span><b>Anos de experiência ou formação</b> acima do requisito, para senioridade.</span></li>
+        <li><span class="ci">✓</span><span><b>Aprovador e data</b> da decisão de estouro, por alçada.</span></li>
+        <li><span class="ci">✓</span><span><b>Par comparável e o salário dele</b>, para mostrar a diferença analisada.</span></li>
+        <li><span class="ci">✓</span><span><b>Plano de correção do par</b> com prazo, quando há defasagem.</span></li>
+      </ul>
+    </div>
+  </section>
 
   <div class="foot">
-    Fluxo de melhoria · identidade <b>Plano&amp;Plano</b> · três decisões: orçamento, salário, equidade<br>
-    Campos NOVO são inclusões no Pipefy. JÁ EXISTE não recriar. [aprovador] a preencher na reunião. Nenhum teto calculado no modelo atual.
+    Material de estudo · identidade oficial <b>Plano&amp;Plano</b> (Roboto · azul #001651 · vermelho #ff2732)<br>
+    Leitura prévia para a reunião de alinhamento do processo de aprovação de vaga e carta oferta.
   </div>
 
 </div>
@@ -349,11 +383,20 @@
 (function(){
   const m=document.getElementById('motif');
   for(let i=0;i<8;i++){
-    const p=document.createElement('div');
-    p.className='petal';
+    const p=document.createElement('div');p.className='petal';
     p.style.transform=`translate(-50%,-50%) rotate(${i*45}deg)`;
     p.style.opacity = i%2 ? .30 : .55;
     m.appendChild(p);
+  }
+  const em=document.getElementById('emotif');
+  for(let i=0;i<8;i++){
+    const p=document.createElement('div');
+    p.style.position='absolute';p.style.left='50%';p.style.top='50%';
+    p.style.width='26px';p.style.height='58px';p.style.borderRadius='50%';
+    p.style.background='#ff2732';p.style.transformOrigin='0 88px';
+    p.style.transform=`translate(-50%,-50%) rotate(${i*45}deg)`;
+    p.style.opacity=i%2?.25:.45;
+    em.appendChild(p);
   }
 })();
 </script>
